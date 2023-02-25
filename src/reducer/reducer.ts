@@ -4,6 +4,7 @@ export const ACTIONS = {
   SETUSER: "SETUSER",
   SETLOADING: "SETLOADING",
   SETPHOTOURL: "SETPHOTOURL",
+  DARKMODETOGGLE: "DARKMODETOGGLE",
 };
 
 export interface Action {
@@ -27,6 +28,11 @@ export const reducer = (state: Context, action: Action): Context => {
       return {
         ...state,
         photoURL: action.payload,
+      };
+    case ACTIONS.DARKMODETOGGLE:
+      return {
+        ...state,
+        darkModeEnabled: action.payload,
       };
     default:
       return state;

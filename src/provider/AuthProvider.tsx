@@ -7,7 +7,7 @@ import {
   getRedirectResult,
   UserCredential,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase.setup";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { ACTIONS, reducer } from "../reducer/reducer";
@@ -74,7 +74,6 @@ const setUserDataInDatabase = async (
 };
 
 // Gets user info from firestore
-
 interface UserData {
   uid: string;
   photoURL: string;
@@ -151,29 +150,29 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  // const darkModeToggle = async (
-  //   uid: string,
-  //   darkModeEnabled: boolean
-  // ): Promise<void> => {
-  //   const userProfileRef = doc(db, "users", uid);
+  const darkModeToggle = async (
+    uid: string,
+    darkModeEnabled: boolean
+  ): Promise<void> => {
+    const userProfileRef = doc(db, "users", uid);
 
-  //   await updateDoc(userProfileRef, {
-  //     darkModeEnabled: darkModeEnabled,
-  //   });
+    await updateDoc(userProfileRef, {
+      darkModeEnabled: darkModeEnabled,
+    });
 
-  //   const docRef = doc(db, "users", uid),
-  //     docSnap = await getDoc(docRef);
+    const docRef = doc(db, "users", uid),
+      docSnap = await getDoc(docRef);
 
-  //   docSnap.exists() &&
-  //     dispatch({
-  //       type: ACTIONS.DARKMODETOGGLE,
-  //       payload: docSnap.data().darkModeEnabled,
-  //     });
-  // };
+    docSnap.exists() &&
+      dispatch({
+        type: ACTIONS.DARKMODETOGGLE,
+        payload: docSnap.data().darkModeEnabled,
+      });
+  };
 
   const value = {
     ...state,
-    // darkModeToggle,
+    darkModeToggle,
     signInWithFacebook,
     logOut,
   };

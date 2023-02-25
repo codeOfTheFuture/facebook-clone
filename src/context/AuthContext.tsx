@@ -5,8 +5,8 @@ export type Context = {
   user: User | null;
   loading: boolean;
   photoURL: string;
-  // darkModeEnabled: boolean;
-  // darkModeToggle: (uid: string, darkModeEnabled: boolean) => Promise<void>;
+  darkModeEnabled: boolean;
+  darkModeToggle: (uid: string, darkModeEnabled: boolean) => Promise<void>;
   signInWithFacebook: () => Promise<void>;
   logOut: () => Promise<void>;
 };
