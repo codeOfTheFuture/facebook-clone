@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { useAuth } from "../../context/AuthContext";
 
-interface RadioButtonProps {
+interface Props {
   name: string;
   radioId: string;
 }
 
-const RadioButton: FC<RadioButtonProps> = ({ name, radioId }) => {
+const RadioBtn: FC<Props> = ({ name, radioId }) => {
   const { user, darkModeEnabled, darkModeToggle } = useAuth();
 
   const handleClick = (): Promise<void> | null =>
@@ -38,4 +38,4 @@ const RadioButton: FC<RadioButtonProps> = ({ name, radioId }) => {
   );
 };
 
-export default RadioButton;
+export default RadioBtn;
