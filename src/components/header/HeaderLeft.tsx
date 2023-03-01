@@ -1,15 +1,11 @@
 import { FC } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
+import HeaderLogo from "../../assets/social-facebook.webp";
 
 const HeaderLeft: FC = () => {
   return (
     <div className="flex items-center">
-      <img
-        src="https://links.papareact.com/5me"
-        alt="Facebook header logo"
-        width={40}
-        height={40}
-      />
+      <img src={HeaderLogo} alt="Facebook header logo" width={40} height={40} />
 
       <div
         className="flex ml-2 items-center rounded-full bg-gray-100 p-2 dark:bg-gray-600"

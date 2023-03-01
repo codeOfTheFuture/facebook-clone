@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Sidebar from "./sidebar/Sidebar";
 import Feed from "./feed/Feed";
-// import Widgets from "./Widgets";
+import Widgets from "./widgets/Widgets";
 
 const Main: FC = () => {
   return (
@@ -10,7 +10,7 @@ const Main: FC = () => {
       data-test="component-main">
       <Sidebar />
       <Feed />
-      {/* <Widgets /> */}
+      <Widgets />
     </main>
   );
 };
