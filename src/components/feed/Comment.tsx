@@ -15,8 +15,8 @@ interface CommentData {
 }
 
 const Comment: FC<Props> = ({ commentData }) => {
-  const { name, comment, image, commentImage, timestamp }: CommentData =
-    commentData.data();
+  const { name, comment, image, commentImage, timestamp } =
+    commentData.data() as CommentData;
 
   return (
     <div className="flex mt-4">

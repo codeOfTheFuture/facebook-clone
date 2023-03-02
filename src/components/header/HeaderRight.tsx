@@ -25,9 +25,7 @@ const HeaderRight: FC = () => {
   });
 
   return (
-    <div
-      className="flex items-center sm:space-x-2 justify-end"
-      data-test="component-header-right">
+    <div className="flex items-center sm:space-x-2 justify-end">
       <HeaderIcon
         Icon={MenuIcon}
         iconClassName={"menuIcon"}

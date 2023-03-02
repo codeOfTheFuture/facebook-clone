@@ -1,6 +1,13 @@
 import { FC } from "react";
 import Reaction from "./Reaction";
 
+import Like from "../../assets/reactions/like.gif";
+import Heart from "../../assets/reactions/heart.gif";
+import Haha from "../../assets/reactions/haha.gif";
+import Wow from "../../assets/reactions/wow.gif";
+import Sad from "../../assets/reactions/sad.gif";
+import Angry from "../../assets/reactions/angry.gif";
+
 interface Props {
   likeButtonHover: boolean;
   addReaction: () => Promise<void>;
@@ -21,33 +28,17 @@ const Reactions: FC<Props> = ({
       }`}
       onMouseEnter={() => likeButtonEnter()}
       onMouseLeave={() => likeButtonLeave()}>
+      <Reaction reaction={Like} reactionType="like" addReaction={addReaction} />
       <Reaction
-        reaction="/images/reactions/like.gif"
-        reactionType="like"
-        addReaction={addReaction}
-      />
-      <Reaction
-        reaction="/images/reactions/heart.gif"
+        reaction={Heart}
         reactionType="heart"
         addReaction={addReaction}
       />
+      <Reaction reaction={Haha} reactionType="haha" addReaction={addReaction} />
+      <Reaction reaction={Wow} reactionType="wow" addReaction={addReaction} />
+      <Reaction reaction={Sad} reactionType="sad" addReaction={addReaction} />
       <Reaction
-        reaction="/images/reactions/haha.gif"
-        reactionType="haha"
-        addReaction={addReaction}
-      />
-      <Reaction
-        reaction="/images/reactions/wow.gif"
-        reactionType="wow"
-        addReaction={addReaction}
-      />
-      <Reaction
-        reaction="/images/reactions/sad.gif"
-        reactionType="sad"
-        addReaction={addReaction}
-      />
-      <Reaction
-        reaction="/images/reactions/angry.gif"
+        reaction={Angry}
         reactionType="angry"
         addReaction={addReaction}
       />
