@@ -1,18 +1,29 @@
-import { FC, FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
-const Login: FC = () => {
-  const { signInWithFacebook, user } = useAuth();
+const Login = () => {
+  const { user, signInWithFacebook } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   // Handle Sign In
   const handleSignIn = (e: FormEvent) => {
     e.preventDefault();
 
-    signInWithFacebook();
-    navigate("/");
+    signInWithFacebook()
+      .then(() => {
+        console.log("Logged In", user);
+      })
+      .catch(() => {
+        console.log("Problem Logging In");
+      });
   };
 
   return (

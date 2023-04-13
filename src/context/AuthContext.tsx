@@ -3,7 +3,6 @@ import { createContext, useContext } from "react";
 
 export type Context = {
   user: User | null;
-  loading: boolean;
   photoURL: string;
   darkModeEnabled: boolean;
   darkModeToggle: (uid: string, darkModeEnabled: boolean) => Promise<void>;
@@ -13,7 +12,6 @@ export type Context = {
 
 export const initialState = {
   user: null,
-  loading: false,
   photoURL: "",
   darkModeEnabled: false,
   darkModeToggle: async () => {},

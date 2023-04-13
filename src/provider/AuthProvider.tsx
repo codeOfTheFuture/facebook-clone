@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useReducer } from "react";
+import { ReactNode, useEffect, useReducer, useState } from "react";
 import { AuthContext, initialState } from "../context/AuthContext";
 import {
   FacebookAuthProvider,
@@ -53,7 +53,7 @@ const createBase64DataUrlFromBlob = async (blob: Blob): Promise<string> => {
 const isUserInDatabase = async (uid: string): Promise<boolean> => {
   const docRef = doc(db, "users", uid);
   const docSnapshot = await getDoc(docRef);
-  console.log("User not in database");
+
   return docSnapshot.exists();
 };
 
@@ -88,14 +88,13 @@ const getUserData = async (uid: string): Promise<UserData | undefined> => {
   }
 };
 
-export const AuthProvider: FC<Props> = ({ children }) => {
+export const AuthProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [loading, setLoading] = useState(true);
 
   useEffect(
     () =>
       auth.onAuthStateChanged(async firebaseUser => {
-        dispatch({ type: ACTIONS.SETUSER, payload: firebaseUser });
-
         if (firebaseUser) {
           try {
             const result = await getRedirectResult(auth);
@@ -118,26 +117,28 @@ export const AuthProvider: FC<Props> = ({ children }) => {
                 payload: userData.photoURL,
               });
             }
+
+            dispatch({ type: ACTIONS.SETUSER, payload: firebaseUser });
           } catch (error) {
             console.error(error);
           }
         } else {
+          dispatch({ type: ACTIONS.SETUSER, payload: null });
           dispatch({ type: ACTIONS.SETPHOTOURL, payload: "" });
         }
+
+        setLoading(false);
       }),
     []
   );
 
   const signInWithFacebook = async (): Promise<void> => {
-    dispatch({ type: ACTIONS.SETLOADING, payload: true });
     const provider = new FacebookAuthProvider();
 
     try {
       await signInWithRedirect(auth, provider);
     } catch (error) {
       console.error(error);
-    } finally {
-      dispatch({ type: ACTIONS.SETLOADING, payload: false });
     }
   };
 
@@ -179,7 +180,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!state.loading && children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
